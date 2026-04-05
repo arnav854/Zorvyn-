@@ -32,7 +32,13 @@ const userSchema = new Schema({
         default: "viewer",
         select : "false",
     } , 
-});
+    status : {
+        type : String,
+        enum : ["active", "inactive"],
+        default: "active",
+        select : "false",
+    }
+}, {timestamps: true });
 
 const User = model("User", userSchema);
 

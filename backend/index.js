@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import connectToDatabase from "./DB/dbConnection.js";
 import authRoute from "./routers/auth.route.js"
 import cookieParser from "cookie-parser";
-
+import financialRecordRoute from "./routers/financialRecord.route.js"
 dotenv.config();
 
 const PORT = process.env.PORT || 5001;
@@ -20,7 +20,7 @@ app.use(cookieParser())
   
 
 app.use("/api/auth",authRoute)
-
+app.use("/api/financialRecord",financialRecordRoute)
 
 
 
