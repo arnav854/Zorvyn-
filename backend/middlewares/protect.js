@@ -34,7 +34,7 @@ export const protectRoute = async (req, res, next) => {
 };
 
 export const protectAnalyst = (req, res, next) => {
-    if (req.user.role !== "analyst") {
+    if (req.user.role === "viewer") {
         return res.status(403).json({ message: "Forbidden - insufficient permissions" });
     }
     next();

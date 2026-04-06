@@ -4,6 +4,8 @@ import connectToDatabase from "./DB/dbConnection.js";
 import authRoute from "./routers/auth.route.js"
 import cookieParser from "cookie-parser";
 import financialRecordRoute from "./routers/financialRecord.route.js"
+import dashboardRoute from "./routers/dashboard.route.js"
+import { apiLimiter, authlimiter } from "./utils/rate-limit.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 5001;
@@ -19,8 +21,9 @@ app.use(cookieParser())
 
   
 
-app.use("/api/auth",authRoute)
-app.use("/api/financialRecord",financialRecordRoute)
+app.use("/api/auth",apiLimiter,authRoute)
+app.use("/api/financialRecord",authlimiter,financialRecordRoute)
+app.use("/api/dashboard",authlimiter,dashboardRoute)
 
 
 

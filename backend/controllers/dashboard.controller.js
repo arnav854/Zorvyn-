@@ -194,7 +194,7 @@ export const handleGetMonthlyTrends = async (req, res) => {
     }
 };
 
-export const handleWeeklyTrends = async (req, res) => {
+export const handleGetWeeklyTrends = async (req, res) => {
     try {
         const { userId } = req.params;
         if (userId !== req.user.id || req.user.role !== "admin") {
