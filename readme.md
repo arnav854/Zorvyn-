@@ -41,7 +41,7 @@ Zorvyn Project is a **Financial Management System** built with the MERN stack (M
 ## 📁 Project Structure
 
 ```text
-zorvyn/
+
 ├── backend/
 │   ├── controllers/         # Business logic for routes
 │   ├── db/                  # Database connection configuration
