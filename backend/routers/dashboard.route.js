@@ -1,6 +1,6 @@
 import express from "express" 
 import { handleGetCategoryWiseTotal, handleGetMonthlyTrends, handleGetRecentActivity, handleGetSummary, handleGetWeeklyTrends } from "../controllers/dashboard.controller.js"
-import { protectAnalyst } from "../middlewares/protect"
+import { protectAnalyst } from "../middlewares/protect.js"
 
 const router = express.Router() 
 

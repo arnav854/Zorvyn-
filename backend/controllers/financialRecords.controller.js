@@ -120,3 +120,42 @@ export const handleGetUserAllFinancialRecords = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
+
+export const handleFilterFinancialRecords = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { type, category, date } = req.query;
+        const records = await FinancialRecord.aggregate([
+            {
+                $match: {
+                    userId: userId,
+                    ...(type && { type : type }),
+                    ...(category && { category : category }),
+                    ...(date && { date : date }),
+                }
+            },
+            {
+                $sort: {
+                    date: -1,
+                }
+            },
+            {
+                $project: {
+                    id : "$_id",
+                    amount : 1,
+                    type : 1,
+                    category : 1,
+                    date : 1,
+                }
+            }
+        ])
+        if (!records) {
+            return res.status(404).json({ message: "Financial records not found" });
+        }
+        return res.status(200).json(records);
+    } catch (error) {
+        console.log("error in handleFilterFinancialRecords", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
