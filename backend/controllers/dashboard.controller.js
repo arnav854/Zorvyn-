@@ -5,7 +5,7 @@ import FinancialRecord from "../models/financialRecord.model.js";
 export const handleGetSummary = async (req, res) => {
     try {
         const { userId } = req.params;
-        if (userId !== req.user.id || req.user.role !== "admin") {
+        if (userId !== req.user.id || (req.user.role !== "admin" && req.user.role !== "analyst")) {
             return res.status(401).json({ message: "Unauthorized" });
         }
         const summary = await FinancialRecord.aggregate([
@@ -57,7 +57,7 @@ export const handleGetCategoryWiseTotal = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        if (userId !== req.user.id || req.user.role !== "admin") {
+        if (userId !== req.user.id || (req.user.role !== "admin" && req.user.role !== "analyst")) {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
@@ -114,7 +114,7 @@ export const handleGetCategoryWiseTotal = async (req, res) => {
 export const handleGetRecentActivity = async (req, res) => {
     try {
         const { userId } = req.params;
-        if (userId !== req.user.id || req.user.role !== "admin") {
+        if (userId !== req.user.id || (req.user.role !== "admin" && req.user.role !== "analyst")) {
             return res.status(401).json({ message: "Unauthorized" });
         }
         const recentActivity = await FinancialRecord.find({ userId: userId }).sort({ date: -1 }).limit(10);
@@ -140,7 +140,7 @@ export const handleGetRecentActivity = async (req, res) => {
 export const handleGetMonthlyTrends = async (req, res) => {
     try {
         const { userId } = req.params;
-        if (userId !== req.user.id || req.user.role !== "admin") {
+        if (userId !== req.user.id || (req.user.role !== "admin" && req.user.role !== "analyst")) {
             return res.status(401).json({ message: "Unauthorized" });
         }
         const monthlyTrends = await FinancialRecord.aggregate([
