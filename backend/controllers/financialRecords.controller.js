@@ -15,7 +15,6 @@ export const handleCreateFinancialRecord = async (req, res) => {
             type,
             category,
             date : now,
-
         });
         if (description) {
             financialRecord.description = description;
